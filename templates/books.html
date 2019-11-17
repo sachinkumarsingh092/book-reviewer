@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Book
+{% endblock %}
+
+{% block main %}
+
+<div class="row book-container">
+    <div class="col-sm-6">
+        <h2>{{book_info[0]['title']}}</h2>
+        <h5>Author: {{book_info[0]['author']}}</h5>
+        <h5>Published: {{book_info[0]['year']}}</h5>
+        <h5>ISBN: {{book_info[0]['isbn']}}</h5>
+    </div>
+
+    <!--Goodreads reviews -->
+    <div class="col-sm-6">
+        <img class="mb-3" src="../static/goodreads.png" alt="Goodreads" width="200" height="100">
+        <h5>Number of Ratings: {{book_info[1]['work_ratings_count']}}</h5>
+        <h5>Average Rating: {{book_info[1]['average_rating']}}</h5>
+        <h5>
+            <a href="https://www.goodreads.com/search?q={{book_info[0]['title']}}">Goodreads page</a>
+        </h5>
+    </div>
+</div>
+<div class="dropdown-divider"></div>
+
+<h2 class="alert alert-warning" style="text-align: center;">Users Reviews</h2>
+<h4 style="text-align: center;">Write a review</h4>
+
+
+<div>
+    <!-- Review form -->
+    <form method="POST" class="form-border">
+        <div class="form-row">
+            <div class="form-group col-sm-2">
+                    <label for="ratings">Rate this book: </label>
+                    <select id="ratings" name="ratings" class="form-control" required>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                </select>
+            </div>
+            <div class="form-group col-sm-8">
+                <div class="input-group">
+                    <label for="comments">Reviews:  </label>
+                    <textarea class="form-control" name="comments" id="comments" placeholder="Write your reviews" rows="3" cols="8"></textarea>
+                </div>
+            </div>
+            <div class="form-group col-sm">
+                <button type="submit" class="btn btn-outline-primary">Submit</button>
+            </div>
+        </div>    
+    </form>
+
+
+     <!-- Review List -->
+     <div id="userReviews">
+        <h2></h2>
+        {% for review in reviews %}
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h6 class="mb-1" style="color:rgb(196, 120, 22)">{{review['username']}} said...</h6>
+                </div>
+                <p class="mb-1">{{review['comments']}}</p>
+                <small>Rated: {{review['ratings']}}</small>
+            </a>
+            <div class="dropdown-divider"></div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+
+    
+{% endblock %}

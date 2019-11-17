@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="static/style.css">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <title> Books: {% block title %}{% endblock %}</title>
+    </head>
+    <body>
+         <!-- navbar -->
+        <nav class="navbar navbar-expand-sm bg-light navbar-light bg-light border">
+            <div class="collapse navbar-collapse" id="navbar">
+                {% if session.user_id %}
+                    <ul class="navbar-nav">
+                        <a class="nav-link" href="/">Search</a>
+                        <a class="nav-link" href="/logout">Logout</a>
+                        <!-- <a class="nav-link" href="/api">API access</a> -->
+                    </ul>
+                {% else %}
+                    <ul class="navbar-nav">
+                        <a class="nav-link" href="/register">Register</li>
+                        <a class="nav-link" href="/login">Login</li> 
+                    </ul>
+                {% endif %}
+            </div>
+        </nav> 
+
+        {% if get_flashed_messages() %} 
+            <header>
+                <div class="alert alert-primary border text-center" role="alert">
+                    {{ get_flashed_messages() | join(" ") }}
+                </div>
+            </header>
+        {% endif %}
+
+        <main class="container p-5">    
+            {% block main %}{% endblock %}
+        </main>
+        
+        <footer class="small text-center text-muted">
+                Data provided for free by <a href="https://www.goodreads.com/api">Goodreads</a>. View <a href="https://www.goodreads.com/api/terms">Goodreads's Developer Terms of Service</a>.
+        </footer>
+    </body>
+</html>

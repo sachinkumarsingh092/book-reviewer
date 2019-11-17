@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Search
+{% endblock %}
+
+{% block main %}
+    <h1>Search your &#x1f60d; Books </h1>
+    <br>
+    <form action="{{ url_for('search')}}" method="GET">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" name="search" placeholder="Type book, author or ISBN number to search" aria-describedby="basic-addon2" required>
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </div>
+        <!-- <input class="form-control" type="text" name="search" placeholder="Type book, author or ISBN number to search">  -->
+        <!-- <button class="btn btn-primary" type="submit">Search</button> -->
+    </form>
+{% endblock %}

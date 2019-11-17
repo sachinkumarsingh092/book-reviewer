@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Search Result
+{% endblock %}
+
+{% block main %}
+    <h1>&#128269;-Results</h1>
+    <br>
+    <ul>
+    {% for book in books %}
+    <div class="border">
+            <h4>{{ book.title }}</h4>
+            <li>isbn: {{ book.isbn }}</li>
+            <li>author: {{ book.author }}</li>
+            <li>year: {{ book.year }}</li>
+            <a href="/book/{{ book.isbn }}">Go to book page.</a>
+        {% else %}
+            <li>No such book.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}
